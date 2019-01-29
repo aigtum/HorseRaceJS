@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ultimate Horse Race Betting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script src="libraries/p5.js"></script>
+    <script src="libraries/p5.dom.js"></script>
+    <script src="libraries/p5.sound.js"></script>
+    <script src="main.js"></script>
+    <script src="horsebetting.js"></script>
+
+    <h2>Odds:</h2>
+    <table id="odds" style="width:100%">
+        <tr id="oddsName"></tr>
+        <tr id="oddsOdds"></tr>
+    </table>
+    <h2>Place your bets: </h2>
+    <div>
+        <h3>Your funds: <div id="playerFunds"></div></h3>
+    </div>
+    
+    <p>
+        Name: 
+        <select id="betName">
+
+        </select>
+    </p>
+    <p>
+        Amount: <input id="betAmount" type="number">
+    </p>
+    <p id="errors" style="color:red"></p>
+    <button type="submit" id="submitBetInput">Submit</button>
+
+    <p id="results"></p>
+    
+</body>
+</html>
