@@ -31,6 +31,7 @@ function setup() {
 function newGame() {
   // draw track
   track = new Track();
+  player = new Player(100);
   track.show();
   // clear states
   finished = [];
@@ -55,7 +56,7 @@ function newGame() {
     "yellow",
     "purple",
     "magenta",
-    "white",
+    "brown",
     "grey",
   ];
   h1 = new Horse("Rodney", colors.pop(), 5);
@@ -75,7 +76,10 @@ function newGame() {
   // draw horses on the field
   let counter = 2;
   for (var i = 0; i < horses.length; i++) {
-    oddsName.innerHTML += "<td>" + horses[i].name + "</td>";
+    oddsName.innerHTML +=
+      `<td style="background-color: ${horses[i].color}">` +
+      horses[i].name +
+      "</td>";
     oddsOdds.innerHTML += "<td>" + horses[i].odds.toFixed(2) + "</td>";
     betName.innerHTML += "<option>" + horses[i].name + "</option>";
 
@@ -96,9 +100,8 @@ function draw() {
   horses.forEach((horse) => {
     horse.show();
   });
-  if (started == true) {
-    // draw track
 
+  if (started == true) {
     // show finished horses
     for (var i = 0; i < finished.length; i++) {
       finished[i].showFinished();
@@ -121,7 +124,9 @@ function draw() {
     }
 
     // everyone is done
-    if (finished.length == 10) {
+    if (finished.length === 8) {
+      console.log("   🙈---> chosen ", player.chosenHorse);
+      console.log("   🙈---> finished ", finished[0].name);
       if (player.chosenHorse == finished[0].name) {
         player.setMoney(
           player.money + floor(betAmount.value * finished[0].odds)

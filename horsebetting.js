@@ -7,7 +7,7 @@ function Horse(name, color, yPos) {
   this.name = name;
   this.color = color;
   this.pace = Math.ceil(Math.random() * 5 + 5);
-  this.stamina = Math.random() * 100;
+  this.stamina = Math.random() * 200 + 300;
   this.odds = (this.pace * this.stamina) / 100;
   this.extraChance = Math.random();
   this.size = 20;
@@ -26,7 +26,7 @@ function Horse(name, color, yPos) {
     fill("black");
     textAlign(CENTER, CENTER);
     text(
-      this.completeRounds,
+      this.xPos,
       this.xPos + this.size / 2,
       this.yPos + 10,
       this.size,
@@ -37,15 +37,27 @@ function Horse(name, color, yPos) {
   this.showFinished = function () {
     // show finished horses
     fill(this.color);
-    circle(this.xPos - this.size / 2, this.yPos + this.size / 2, this.size);
+    circle(trackLength * 0.66 - this.position * 30, trackHeight / 2, this.size);
     // show finish numbers
     fill("black");
     textAlign(CENTER, CENTER);
-    text(this.position, this.xPos + 2, this.yPos, this.size, this.size);
+    text(
+      this.position,
+      trackLength * 0.66 - this.position * 30,
+      trackHeight / 2 + 10,
+      this.size,
+      this.size
+    );
     // show finished names
     fill("black");
     textAlign(RIGHT, CENTER);
-    text(this.name, this.xPos - this.size, this.yPos + 8, this.size, this.size);
+    text(
+      this.name,
+      trackLength * 0.66 - this.position * 30,
+      trackHeight / 2 + 20,
+      this.size,
+      this.size
+    );
   };
 
   this.run = function () {
@@ -56,7 +68,7 @@ function Horse(name, color, yPos) {
     }
     // count number of times horse has completed the track
     if (
-      Math.round(this.xPos) == trackLength / 2 &&
+      Math.round(this.xPos) === trackLength / 2 &&
       this.yPos <= trackHeight / 2
     ) {
       this.completeRounds++;
@@ -105,10 +117,11 @@ function Horse(name, color, yPos) {
       this.xPos += this.pace;
     }
     this.stamina -= 1;
-    // if (this.stamina <= 0) {
-    //   this.stamina = Infinity;
-    //   this.pace = this.pace / 2;
-    // }
+    if (this.stamina <= 0) {
+      this.pace = this.pace / Math.ceil(Math.random() * 1 + 1);
+
+      this.stamina = Infinity;
+    }
   };
 
   //   this.run = function () {
