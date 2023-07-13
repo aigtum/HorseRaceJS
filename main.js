@@ -125,8 +125,6 @@ function draw() {
 
     // everyone is done
     if (finished.length === 8) {
-      console.log("   🙈---> chosen ", player.chosenHorse);
-      console.log("   🙈---> finished ", finished[0].name);
       if (player.chosenHorse == finished[0].name) {
         player.setMoney(
           player.money + floor(betAmount.value * finished[0].odds)
